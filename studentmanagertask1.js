@@ -28,7 +28,7 @@ function removeStudent(name) {
     const students = loadStudents();
     const updated = students.filter(s => s.name !== name);
     saveStudents(updated);
-    console.log(` Removed: ${name}`);
+    console.log(` RemoveD: ${name}`);
 }
 
 function searchStudent(name) {
