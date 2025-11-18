@@ -29,7 +29,7 @@ app.get('/student/:name', (req, res) => {
 
 
 app.get('/', (req, res) => {
-    res.send('[{"message": "Hello ali!"}]'); 
+    res.send('[{"message": "Hello ali!!"}]'); 
 });
 
 
