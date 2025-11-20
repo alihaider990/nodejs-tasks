@@ -2,8 +2,14 @@ const express = require('express');
 const app = express();
 
 app.get('/welcome', (req, res) => {
-    res.send('Welcome to my first api');
+    res.json({
+        "message" :('Welcome to my first api')});
+    
+    
 });
+
+
+
 
 app.get('/greet', (req, res) => {
     const name = req.query.name;
@@ -14,15 +20,15 @@ app.get('/greet', (req, res) => {
     }
     else {
         res.json({
-            "message": "Hello, Guest!"
+            "message": "Hello, Guest!" 
         });
     }
 });
 
-app.get('/student/:name', (req, res) => {
+app.get('/Student/:name', (req, res) => {
     const Studentname = req.params.name;
     res.json({
-        "student": Studentname,
+        "Student": Studentname,
         "status": "task fetched"
     });
 })
