@@ -16,6 +16,7 @@ app.post('/todo', (req, res) => {
     if (status && status !== "pending" && status !== "completed") {
         return res.status(400).json({ message: "Status must be pending or completed" });
     }
+
     const todo = {
         id: id++,
         title,
@@ -26,12 +27,17 @@ app.post('/todo', (req, res) => {
 
     res.status(201).json({
         status: "success",
-        todo
+        todos: []
     });
 });
+
 app.get('/todo', (req, res) => {
-    res.json(todos);
+    res.json({
+        status: "success",
+        todos: todos
+    });
 });
+
 app.get('/todo/:id', (req, res) => {
     const todo = todos.find(t => t.id == req.params.id);
 
@@ -40,12 +46,14 @@ app.get('/todo/:id', (req, res) => {
     }
     res.json(todo);
 });
+
 app.put('/todo/:id', (req, res) => {
     const todo = todos.find(t => t.id == req.params.id);
 
     if (!todo) {
         return res.status(404).json({ message: "Todo not found" });
     }
+
     const { title, description, status } = req.body;
 
     if (status && status !== "pending" && status !== "completed") {
@@ -58,6 +66,7 @@ app.put('/todo/:id', (req, res) => {
 
     res.json(todo);
 });
+
 app.delete('/todo/:id', (req, res) => {
     const index = todos.findIndex(t => t.id == req.params.id);
 
@@ -66,7 +75,12 @@ app.delete('/todo/:id', (req, res) => {
     }
 
     todos.splice(index, 1);
-    res.status(204).end();
+
+    
+    res.json({
+        status: "success",
+        message: "Todo deleted"
+    });
 });
 
 app.listen(3000, () => {
